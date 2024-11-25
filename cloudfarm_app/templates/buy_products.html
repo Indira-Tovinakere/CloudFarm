@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Products</title>
+    <style>
+        /* General Reset */
+        /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+            font-family: 'open sans', serif;/* Modern sans-serif font */
+            background: url('https://ideogram.ai/assets/progressive-image/balanced/response/GDuMWS0CTzObAgsISSpyVw') no-repeat center center fixed; /* New background image */
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: black; /* Darker text for better readability */
+            margin: 0;
+            background-attachment: fixed;
+        }
+.container {
+    background: white; /* Transparent background */
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    padding: 40px 30px;
+    width: 700%;
+    max-width: 600px;
+    overflow-y: auto;
+    max-height: 90vh;
+    border: 1px solid #060606;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.9rem;
+    color: black;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+.product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: background 0.3s ease;
+}
+/*.product:hover {
+    background:rgba(235, 234, 234, 0.3); /* White with 50% opacity */
+    /*border-radius: 10px;
+}*/
+.product img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    margin-right: 15px;
+}
+.product h3 {
+    font-size: 1.3rem;
+    color: black;
+    flex-grow: 1;
+    font-weight: 500;
+    font-weight: bold;
+}
+.product button {
+    background: rgba(255, 255, 255, 0.3);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    /*text-transform: uppercase;*/
+    transition: all 0.3s ease;
+}
+.product button:hover {
+    background: rgba(255, 255, 255, 0.3);;
+    transform: scale(1.05);
+}
+.cart {
+    margin-top: 30px;
+    text-align: center;
+}
+.cart h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: black;
+}
+.cart-items {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: black;
+}
+.cart button {
+    background: black;
+    color: #817f7f;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+.cart button:hover {
+    background: black;
+    transform: translateY(-2px);
+}
+.quantity-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-container button {
+    background: rgba(255, 255, 255, 0.7);
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.quantity-container button:hover {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+.quantity-container .quantity {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+}
+@media (max-width: 768px) {
+    .product img {
+        width: 60px;
+        height: 60px;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    .product h3 {
+        font-size: 1.2rem;
+    }
+    .product button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    .cart h2 {
+        font-size: 1.6rem;
+    }
+    .cart button {
+        padding: 8px 20px;
+        font-size: 1rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div style="position: fixed; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); padding: 15px 0; z-index: 1000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+        <div style="max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <!-- Logo -->
+            <h1 style="color: #ffffff; font-size: 1.5em; margin: 0;">CloudFarm</h1>
+            <!-- Navigation Links -->
+            <nav>
+                <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
+                <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
+                <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
+                <a href="{% url 'buy_products' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY FERTILIZERS</a>
+                <!--<a href="{% url 'view_cart' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">CART</a>-->
+                <a href="{% url 'login' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">LOGOUT</a>
+            </nav>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 100px;">
+        <h1>Buy Products</h1>
+        <div class="product">
+            <h3>DAP Fertilizer</h3>
+            <img src="/media/fertilizer_images/DAP.png" alt="DAP Fertilizer">
+            <div class="quantity-container">
+                <button class="decrease" onclick="updateQuantity('DAP Fertilizer', -1)">-</button>
+                <span class="quantity" id="DAP-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('DAP Fertilizer', 1)">+</button>
+            </div>
+        </div>
+        <div class="product">
+            <h3>MOP Fertilizer</h3>
+            <img src="/media/fertilizer_images/MOP.png" alt="MOP Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('MOP Fertilizer', -1)">-</button>
+                <span class="quantity" id="MOP-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('MOP Fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>SSP Fertilizer</h3>
+            <img src="/media/fertilizer_images/SSP.png" alt="SSP Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('SSP Fertilizer', -1)">-</button>
+                <span class="quantity" id="SSP-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('SSP Fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>Urea Fertilizer</h3>
+            <img src="/media/fertilizer_images/urea.png" alt="Urea Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('Urea Fertilizer', -1)">-</button>
+                <span class="quantity" id="Urea-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('Urea Fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>10-10-10 Fertilizer</h3>
+            <img src="/media/fertilizer_images/10-10-10.png" alt="10-10-10 Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('10-10-10 Fertilizer', -1)">-</button>
+                <span class="quantity" id="10-10-10-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('10-10-10 Fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>10-26-26 Fertilizer</h3>
+            <img src="/media/fertilizer_images/10-26-26.png" alt="10-26-26 Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('10-26-26 Fertilizer', -1)">-</button>
+                <span class="quantity" id="10-26-26-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('10-26-26 Fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>12-32-16 Fertilizer</h3>
+            <img src="/media/fertilizer_images/12-32-16.png" alt="12-32-16 Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('12-32-16 Fertilizer', -1)">-</button>
+                <span class="quantity" id="12-32-16-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('12-32-16 Fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>19-19-19 Fertilizer</h3>
+            <img src="/media/fertilizer_images/19-19-19.png" alt="19-19-19 Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('19-19-19 Fertilizer', -1)">-</button>
+                <span class="quantity" id="19-19-19-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('19-19-19 Fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>20-20-20 Fertilizer</h3>
+            <img src="/media/fertilizer_images/20-20-20.png" alt="20-20-20 Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('20-20-20 Fertilizer', -1)">-</button>
+                <span class="quantity" id="20-20-20-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('20-20-20 Fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>Ammonium Sulphate Fertilizer</h3>
+            <img src="/media/fertilizer_images/ammonium sulphate.png" alt="Ammonium Sulphate Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('Ammonium Sulphate Fertilizer', -1)">-</button>
+                <span class="quantity" id="Ammonium-Sulphate-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('Ammonium Sulphate Fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>Ferrous Sulphate Fertilizer</h3>
+            <img src="/media/fertilizer_images/ferrous-sulphate.png" alt="Ferrous Sulphate Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('ferrous sulphate fertilizer', -1)">-</button>
+                <span class="quantity" id="ferrous-sulphate-fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('ferrous sulphate fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>Hydrated Lime Fertilizer</h3>
+            <img src="/media/fertilizer_images/hydrated-lime.png" alt="hydrated-lime">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('hydrated-lime fertilizer', -1)">-</button>
+                <span class="quantity" id="hydrated-lime-fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('hydrated-lime fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>Magnesium Sulphate Fertilizer</h3>
+            <img src="/media/fertilizer_images/Magnesium-Sulphate.png" alt="Magnesium-Sulphate Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('Magnesium-Sulphate fertilizer', -1)">-</button>
+                <span class="quantity" id="Magnesium-Sulphate-fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('Magnesium-Sulphate fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>Sulphur Fertilizer</h3>
+            <img src="/media/fertilizer_images/sulphur.png" alt="Sulphur Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('Sulphur fertilizer', -1)">-</button>
+                <span class="quantity" id="sulphur-fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('sulphur fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>White Potash Fertilizer</h3>
+            <img src="/media/fertilizer_images/white-potash.png" alt="White Potash Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('white-potash fertilizer', -1)">-</button>
+                <span class="quantity" id="white-potash-fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('white-potash fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>Chelated Iron Fertilizer</h3>
+            <img src="/media/fertilizer_images/chilated-iron.jpg" alt="Chelated Iron Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('chelated-iron fertilizer', -1)">-</button>
+                <span class="quantity" id="chelated-iron-fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('chelated-iron fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>Chelated Foliar Grade-2 1kg Fertilizer</h3>
+            <img src="/media/fertilizer_images/Chelated-Foliar-Grade-2-1-kg-.jpg" alt="Chelated-Foliar Grade-2 1kg Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('Chelated-Foliar-Grade-2-1-kg-fertilizer', -1)">-</button>
+                <span class="quantity" id="Chelated-Foliar-Grade-2-1-kg-fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('Chelated-Foliar-Grade-2-1-kg-fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>Chelated Zinc 1kg Fertilizer</h3>
+            <img src="/media/fertilizer_images/19-19-19.png" alt="Chelated Zinc 1kg Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('Chelated zinc 1kg Fertilizer', -1)">-</button>
+                <span class="quantity" id="Chelated-zinc-1kg-Fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('Chelated zinc 1kg Fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <div class="product">
+            <h3>Chelated-Foliar Fertilizer</h3>
+            <img src="/media/fertilizer_images/CHILATED FOILAR.jpg" alt="Chelated Foliar Fertilizer">
+            <div class="quantity-container">
+            <button class="decrease" onclick="updateQuantity('Chelated-Foliar fertilizer', -1)">-</button>
+                <span class="quantity" id="Chelated-Foliar-fertilizer-quantity">0</span>
+                <button class="increase" onclick="updateQuantity('Chelated-Foliar fertilizer', 1)">+</button>
+                </div>
+        </div>
+        <!-- Add remaining products in a similar way -->
+        <div class="cart">
+            <h2>Your Cart</h2>
+            <p class="cart-items">No items in cart.</p>
+            <button onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize cart with quantities from localStorage
+        
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || {};
+        console.log('Cart initialized:', cartItems); // Debugging line to check if the cart is initialized correctly
+        
+        // Example list of fertilizers (19 fertilizers)
+        const fertilizers = Array.from({ length: 19 }, (_, i) => `Fertilizer ${i + 1}`);
+        
+        // Function to update the quantity of items in the cart
+        function updateQuantity(product, change) {
+            console.log(`Updating ${product}: Change = ${change}`);
+        
+            // Initialize product quantity if it doesn't exist
+            if (!cartItems[product]) {
+                cartItems[product] = 0;
+                console.log(`Product ${product} not found in cart. Initializing to 0.`);
+            }
+        
+            // Update the quantity based on the change
+            cartItems[product] += change;
+        
+            // Prevent negative quantities
+            if (cartItems[product] < 0) {
+                cartItems[product] = 0;
+            }
+        
+            console.log(`Updated quantity for ${product}: ${cartItems[product]}`);
+        
+            // Update the UI for that product's quantity
+            const quantityElement = document.getElementById(`${product.replace(/\s+/g, '-')}-quantity`);
+            if (quantityElement) {
+                quantityElement.textContent = cartItems[product]; // Update the displayed quantity
+            } else {
+                console.log(`Element for ${product} not found in DOM.`);
+            }
+        
+            // Save updated cart to localStorage
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+            // Update the cart display
+            updateCartDisplay();
+        }
+        
+        // Function to update the cart display
+        function updateCartDisplay() {
+            const cartItemsArray = Object.entries(cartItems)
+                .filter(([product, quantity]) => quantity > 0)
+                .map(([product, quantity]) => `${product} (${quantity})`);
+            document.querySelector('.cart-items').textContent =
+                cartItemsArray.length > 0 ? cartItemsArray.join(', ') : 'No items in cart.';
+        }
+        
+        // Function to handle checkout
+        /*function checkout() {
+            // Check if the cart is empty
+            if (Object.values(cartItems).every(quantity => quantity === 0)) {
+                alert('Your cart is empty!');
+            } else {
+                // Save the cart to localStorage
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        
+                // Redirect to the view_cart page
+                window.location.href = "{% url 'view_cart' %}"; // Replace with the correct Django URL pattern
+            }
+        }*/
+        function checkout() {
+        alert("Checked out!");
+    }
+        // Function to create product buttons dynamically
+        function createProductButtons() {
+            const productsList = document.getElementById('products-list');
+            fertilizers.forEach(fertilizer => {
+                // Create product container
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+                productDiv.id = `${fertilizer.replace(/\s+/g, '-')}-container`;
+        
+                // Create product name
+                const productName = document.createElement('span');
+                productName.textContent = fertilizer;
+                productDiv.appendChild(productName);
+        
+                // Create quantity element for each product
+                const quantityElement = document.createElement('span');
+                quantityElement.id = `${fertilizer.replace(/\s+/g, '-')}-quantity`;
+                quantityElement.textContent = cartItems[fertilizer] || 0;
+                productDiv.appendChild(quantityElement);
+        
+                // Create increment button
+                const incrementBtn = document.createElement('button');
+                incrementBtn.textContent = '+';
+                incrementBtn.addEventListener('click', () => {
+                    console.log(`Incrementing ${fertilizer}`);
+                    updateQuantity(fertilizer, 1);
+                });
+                productDiv.appendChild(incrementBtn);
+        
+                // Create decrement button
+                const decrementBtn = document.createElement('button');
+                decrementBtn.textContent = '-';
+                decrementBtn.addEventListener('click', () => {
+                    console.log(`Decrementing ${fertilizer}`);
+                    updateQuantity(fertilizer, -1);
+                });
+                productDiv.appendChild(decrementBtn);
+        
+                // Append the product div to the products list
+                productsList.appendChild(productDiv);
+            });
+        }
+        function addToCart() {
+    let cart = [];
+
+    // Assuming you have an array of all product names
+    let productNames = [
+        "DAP Fertilizer", "MOP Fertilizer", "SSP Fertilizer", "Urea Fertilizer", 
+        "10-10-10 Fertilizer", "10-26-26 Fertilizer", "12-32-16 Fertilizer", 
+        "19-19-19 Fertilizer", "20-20-20 Fertilizer", "Ammonium Sulphate Fertilizer", 
+        "Ferrous Sulphate Fertilizer", "Hydrated Lime Fertilizer", "Magnesium Sulphate Fertilizer", 
+        "Sulphur Fertilizer", "White Potash Fertilizer", "Chelated Iron Fertilizer", 
+        "Chelated Foliar Grade-2 1kg Fertilizer", "Chelated Zinc 1kg Fertilizer"
+    ];
+
+    productNames.forEach(product => {
+        let quantity = parseInt(document.getElementById(`${product}-quantity`).textContent);
+        if (quantity > 0) {
+            cart.push({ product, quantity });
+        }
+    });
+
+    // Display cart or send to backend
+    console.log(cart);
+}
+
+        
+        // On page load, initialize cart display and product buttons
+        document.addEventListener('DOMContentLoaded', () => {
+            createProductButtons(); // Dynamically create product buttons
+        
+            // Initialize the display for products in the cart
+            Object.keys(cartItems).forEach(product => {
+                const quantity = cartItems[product];
+                if (quantity > 0) {
+                    const quantityElement = document.getElementById(
+                        `${product.replace(/\s+/g, '-')}-quantity`
+                    );
+                    if (quantityElement) {
+                        quantityElement.textContent = quantity;
+                    }
+                }
+            });
+        
+            // Update the cart display
+            updateCartDisplay();
+        
+            // Attach checkout event listener
+            document.getElementById('checkout-btn').addEventListener('click', checkout);
+        });
+    </script>          
+</body>
+</html>

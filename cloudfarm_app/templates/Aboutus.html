@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CloudFarm</title>
+</head>
+<body style="margin: 0; font-family: 'Georgia', serif; color: #2c3e50; background: url('https://ideogram.ai/assets/progressive-image/balanced/response/BZ70hLKIQxyBiLnT_C-hhA') no-repeat center center fixed; background-size: cover;">
+
+    <!-- Navigation Bar -->
+    <div style="position: fixed; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); padding: 15px 0; z-index: 1000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+        <div style="max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <!-- Logo -->
+            <h1 style="color: #ffffff; font-size: 1.5em; margin: 0;">CloudFarm</h1>
+            <!-- Navigation Links -->
+            <nav>
+                <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
+                <a href="#about-us" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
+                <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
+                <a href="{% url 'buy_products' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY  FERTILIZERS</a>
+                <a href="{% url 'login' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">LOGOUT</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Add Spacing to Avoid Overlapping Content -->
+    <div style="height: 80px;"></div>
+
+    <!-- About Us Section -->
+    <div id="about-us" style="max-width: 1250px; margin: 50px auto; background: rgba(129, 128, 128, 0.85); padding: 30px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);">
+        <h1 style="text-align: center; color: #18222c; font-size: 2.0em; margin-bottom: 20px; font-family: 'Arial', sans-serif;">ABOUT US</h1>
+        <p style="font-size: 1.2em; line-height: 1.8; text-align: justify; color: #18222c;">
+            Welcome to <strong>CloudFarm</strong>, a revolutionary platform designed to transform modern agriculture through the power of technology. We merge state-of-the-art cloud computing with agricultural insights to empower farmers, reduce inefficiencies, and promote sustainability.
+        </p>
+        <p style="font-size: 1.2em; line-height: 1.8; text-align: justify; color: #18222c;">
+            At CloudFarm, our mission is to bridge the gap between technology and farming practices by providing real-time monitoring, smart weather predictions, and actionable insights. Our goal is to help farmers optimize resources and achieve higher yields while contributing to environmental preservation.
+        </p>
+        <p style="font-size: 1.2em; line-height: 1.8; text-align: justify; color: #18222c;">
+            Backed by a team of seasoned technologists, agricultural scientists, and innovators, CloudFarm is not just a tool; it’s a movement to create a better future for farming. Join us in shaping the next era of agriculture.
+        </p>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div id="contact-us" style="max-width: 1250px; margin: 50px auto; background: rgba(129, 128, 128, 0.85); padding: 30px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);">
+        <h2 style="text-align: center; color: #18222c; font-size: 2em; margin-bottom: 20px; font-family: 'Arial', sans-serif;">Contact Us</h2>
+        <p style="font-size: 1.2em; text-align: center; color: #18222c; margin-bottom: 20px;">
+            We’d love to hear from you! Feel free to reach out with questions, partnerships, or support inquiries.
+        </p>
+        <div style="text-align: center;">
+            <p style="font-size: 1.2em; color: #18222c;">
+                ✉️ Email: <a href="mailto:support@cloudfarm.com" style="color: #18222c; text-decoration: none;">support@cloudfarm.com</a>
+            </p>
+            <p style="font-size: 1.2em; color: #18222c;">
+                ☎️ Phone: <a href="tel:+919823561234" style="color: #18222c; text-decoration: none;">+919823561234</a>
+            </p>
+            <p style="font-size: 1.2em; color: #18222c;">
+                🏠 Address: CloudFarm Inc., 123 Green Valley, TechPark, Silicon City, Bengaluru-56004, Karnataka, India
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Agriculture</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://files.oaiusercontent.com/file-EztGSAfZyo6JbjvinxJUVG?se=2024-11-23T13%3A08%3A39Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D76f6a2cf-b756-4bfe-bf12-0194e99572c2.webp&sig=UHYg2TO%2BB/xe4rWSks%2BV5S9laZbbj/aDjC%2BJDhTvACg%3D') 
+                        no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Header Section */
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #6A9D3E;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #6A9D3E;
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 50px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        button:hover {
+            background-color: #5C8B33;
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Footer Section */
+        footer {
+            font-size: 0.9rem;
+            color: #f1f1f1;
+            margin-top: 20px;
+        }
+
+        footer a {
+            color: #6A9D3E;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Fertilizer Card Section */
+        .fertilizer-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .fertilizer-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            margin: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .fertilizer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .fertilizer-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .fertilizer-card h3 {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #6A9D3E;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Agriculture Hub</h1>
+    
+    <!-- Navigation Links -->
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'Aboutus' %}">About Us</a>
+        <a href="{% url 'fertilizer_list' %}">Fertilizers</a>
+        <a href="{% url 'buy_products' %}">Buy  FERTILIZERS</a>
+        <a href="{% url 'login' %}">Logout</a>
+    </nav>
+
+    <a href="{% url 'fertilizer_list' %}">
+        <button>Explore Our Products</button>
+    </a>
+
+    <!-- Fertilizer Cards Section -->
+    <!--<div class="fertilizer-cards">
+        <div class="fertilizer-card">
+            <img src="/static/images/fertilizer1.jpg" alt="Fertilizer 1">
+            <h3>Organic Fertilizer</h3>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/static/images/fertilizer2.jpg" alt="Fertilizer 2">
+            <h3>Potassium Fertilizer</h3>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/static/images/fertilizer3.jpg" alt="Fertilizer 3">
+            <h3>Phosphorus Fertilizer</h3>-->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Powered by <a href="#">Your Agriculture Hub</a></p>
+    </footer>
+</body>
+</html>

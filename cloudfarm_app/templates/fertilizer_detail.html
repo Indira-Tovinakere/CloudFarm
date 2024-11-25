@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ fertilizer.name }}</title>
+    <style>
+        /* Import modern, professional fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap');
+    
+        body {
+            font-family: 'Merriweather', serif; /* Elegant serif font for headers */
+            color: #1e293b; /* Dark slate gray for text */
+            margin: 0;
+            padding: 0;
+            background: url('https://ideogram.ai/assets/progressive-image/balanced/response/i1brnXsXSgOcrEq5oGOHRQ') no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: overlay;
+            background-color: rgba(163, 160, 160, 0.95); /* Light soft overlay */
+        }
+    
+        .container {
+            max-width: 350px; /* Reduced size for compact content */
+            margin: 50px auto;
+            padding: 20px 25px;
+            background: rgba(121, 120, 120, 0.5); /* Frosted glass effect */
+            backdrop-filter: blur(10px); /* Subtle frosted blur */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle transparent border */
+        }
+    
+        h1 {
+            text-align: center;
+            font-family: 'Merriweather', serif; /* Serif font for sophistication */
+            font-size: 2.0em;
+            color: black; /* Deep blue-gray */
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    
+        .image-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    
+        .image-container img {
+            max-width: 60%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+    
+        .details {
+            font-family:'EB Garamond', serif; /* Clean sans-serif font */
+            margin-bottom: 20px;
+        }
+    
+        .details p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: black; /* Muted blue-gray for readability */
+        }
+    
+        .details strong {
+            color: black; /* Soft blue for emphasis */
+        }
+    
+        .back-button {
+            display: block;
+            width: 180px;
+            margin: 15px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #3e3f3f; /* Professional blue */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1em;
+            font-weight: 600;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+    
+        .back-button:hover {
+            background-color: #37383a; /* Darker blue for hover */
+            transform: translateY(-2px);
+        }
+    
+        footer {
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 20px;
+            color: #94a3b8; /* Light gray for footer */
+        }
+    </style>
+    
+    
+    
+</head>
+<body>
+    <div class="container">
+        <h1>{{ fertilizer.name }}</h1>
+
+        <div class="image-container">
+            <img src="{{ fertilizer.image.url }}" alt="{{ fertilizer.name }}">
+        </div>
+
+        <div class="details">
+            <p><strong>Price:</strong> ₹{{ fertilizer.price }}</p>
+            <p><strong>Description:</strong> {{ fertilizer.description }}</p>
+            <p><strong>Suitable Crops:</strong> {{ fertilizer.suitable_crops }}</p>
+        </div>
+
+        <a href="{% url 'fertilizer_list' %}" class="back-button">Back to List</a>
+    </div>
+</body>
+</html>

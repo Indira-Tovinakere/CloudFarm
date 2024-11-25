@@ -1,0 +1,241 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizers</title>
+    <style>-->
+         <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'open sans', serif; /* Elegant and classic font */
+            background: url('https://ideogram.ai/assets/progressive-image/balanced/response/CD3EPPUFTeO8pPJG4KAHjA') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #f1f4f1; /* Dark olive green for a natural touch */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .fertilizer-card {
+            width: 300px;
+            background-color: #929191; /* Semi-transparent white */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .fertilizer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .fertilizer-card img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .fertilizer-card h3 {
+            margin: 15px 0;
+            font-size: 1.4em;
+            color: #3e683e; /* Olive-inspired */
+        }
+
+        .fertilizer-card a {
+            display: inline-block;
+            margin: 10px 0 20px;
+            padding: 10px 20px;
+            background-color: #3e683e; /* Olive button */
+            color: #929191;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .fertilizer-card a:hover {
+            background-color: #2c4c2c; /* Darker olive */
+        }
+    </style>
+</head>
+<body>
+    <!--<h1>Fertilizers</h1>
+    <div class="container">-->
+        <!-- Fertilizer 1 -->
+        <!--<div class="fertilizer-card">
+            <img src="/media/fertilizer_images/DAP.png" alt="DAP Fertilizer">
+            <h3>DAP Fertilizer</h3>
+            <a href="/fertilizers/1/">View Details</a>
+        </div>-->
+
+        <!-- Fertilizer 2 -->
+        <!--<div class="fertilizer-card">
+            <img src="/media/fertilizer_images/MOP.png" alt="MOP Fertilizer">
+            <h3>MOP Fertilizer</h3>
+            <a href="/fertilizers/2/">View Details</a>
+        </div>-->
+
+        <!-- Fertilizer 3 -->
+        <!--<div class="fertilizer-card">
+            <img src="/media/fertilizer_images/SSP.png" alt="SSP Fertilizer">
+            <h3>SSP Fertilizer</h3>
+            <a href="/fertilizers/3/">View Details</a>
+        </div>-->
+
+        <!-- Additional Fertilizer Cards -->
+        <!-- Repeat the existing structure for other fertilizers 
+    </div>-->
+    <div style="position:absolute; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); padding: 15px 0; z-index: 1000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+        <div style="max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <!-- Logo -->
+            <h1 style="color: #ffffff; font-size: 1.5em; margin: 0;">CloudFarm</h1>
+            <!-- Navigation Links -->
+            <nav>
+                <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
+                <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
+                <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
+                <a href="{% url 'buy_products'%}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY FERTILIZERS</a>    
+                <a href="{% url 'login' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">LOGOUT</a>
+            </nav>
+        </div>
+</body>
+</html>
+
+    </style>
+</head>
+<body>
+    <h1>FERTILIZERS</h1>
+    <div class="container">
+        <!-- Fertilizer 1 -->
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/DAP.png" alt="DAP Fertilizer">
+            <h3>DAP Fertilizer</h3>
+            <a href="/fertilizers/1/">View Details</a>
+        </div>
+
+        <!-- Fertilizer 2 -->
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/MOP.png" alt="MOP Fertilizer">
+            <h3>MOP Fertilizer</h3>
+            <a href="/fertilizers/2/">View Details</a>
+        </div>
+
+        <!-- Fertilizer 3 -->
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/SSP.png" alt="SSP Fertilizer">
+            <h3>SSP Fertilizer</h3>
+            <a href="/fertilizers/3/">View Details</a>
+        </div>
+
+        <!-- Fertilizer 4 -->
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/urea.png" alt="Urea Fertilizer">
+            <h3>Urea Fertilizer</h3>
+            <a href="/fertilizers/19/">View Details</a>
+        </div>
+
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/10-10-10.png" alt="10-10-10 Fertilizer">
+            <h3>10-10-10 Fertilizer</h3>
+            <a href="/fertilizers/14/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/10-26-26.png" alt="10-26-26 Fertilizer">
+            <h3>10-26-26 Fertilizer</h3>
+            <a href="/fertilizers/11/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/12-32-16.png" alt="12-32-16 Fertilizer">
+            <h3>12-32-16 Fertilizer</h3>
+            <a href="/fertilizers/12/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/19-19-19.png" alt="19-19-19 Fertilizer">
+            <h3>19-19-19 Fertilizer</h3>
+            <a href="/fertilizers/10/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/20-20-20.png" alt="20-20-20 Fertilizer">
+            <h3>20-20-20 Fertilizer</h3>
+            <a href="/fertilizers/13/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/ammonium sulphate.png" alt="ammonium Fertilizer">
+            <h3>Ammonium Sulphate Fertilizer</h3>
+            <a href="/fertilizers/9/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/ferrous-sulphate.png" alt="ferrous-sulphate Fertilizer">
+            <h3>Ferrous Sulphate Fertilizer</h3>
+            <a href="/fertilizers/17/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/hydrated-lime.png" alt="hydrated-lime Fertilizer">
+            <h3>Hydrated Lime Fertilizer</h3>
+            <a href="/fertilizers/15/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/Magnesium-Sulphate.png" alt="Magnesium-Sulphate Fertilizer">
+            <h3>Magnesium Sulphate Fertilizer</h3>
+            <a href="/fertilizers/4/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/sulphur.png" alt="sulphur Fertilizer">
+            <h3>Sulphur Fertilizer</h3>
+            <a href="/fertilizers/18/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/white-potash.png" alt="white-potash Fertilizer">
+            <h3>White Potash Fertilizer</h3>
+            <a href="/fertilizers/16/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/chilated-iron.jpg" alt="chilated-iron Fertilizer">
+            <h3>Chelated Iron Fertilizer</h3>
+            <a href="/fertilizers/5/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/Chelated-Foliar-Grade-2-1-kg-.jpg" alt="Chelated-Foliar-Grade-2-1-kg- Fertilizer">
+            <h3>Chelated Foliar Grade-2 1kg Fertilizer</h3>
+            <a href="/fertilizers/6/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/Chelatedzn1-kg.jpg" alt="Chelatedzn1-kg Fertilizer">
+            <h3>Chelated Zinc 1kg Fertilizer</h3>
+            <a href="/fertilizers/7/">View Details</a>
+        </div>
+        <div class="fertilizer-card">
+            <img src="/media/fertilizer_images/CHILATED FOILAR.jpg" alt="CHILATED FOILAR Fertilizer">
+            <h3>Chelated Foilar Fertilizer</h3>
+            <a href="/fertilizers/8/">View Details</a>
+        </div>
+    </div>
+</body>
+</html>
