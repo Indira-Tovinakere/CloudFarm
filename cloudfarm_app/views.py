@@ -50,7 +50,7 @@ def login(request):
 from django.shortcuts import render
 from .ml_utils import predict_crop_and_fertilizer
 
-def crop_fertilizer_prediction(request):
+def prediction(request):
     result = {}
     if request.method == "POST":
         n = float(request.POST.get("nitrogen"))
@@ -64,7 +64,7 @@ def crop_fertilizer_prediction(request):
 
         result = predict_crop_and_fertilizer(n, p, k, rainfall, ph)
 
-    return render(request, "crop_fertilizer_prediction.html", {"result": result})
+    return render(request, "prediction.html", {"result": result})
 
 def fertilizer_list(request):
     fertilizers = Fertilizer.objects.all()

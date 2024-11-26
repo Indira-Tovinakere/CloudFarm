@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
 # Path to your dataset
-DATASET_PATH = r"C:\Users\tnraj\Downloads\CloudFarm1\CloudFarm\cloudfarm_project\cloudfarm_app\filled_crop_fertilizer_dataset - filled_crop_fertilizer_dataset.csv"
+DATASET_PATH = r"C:\Users\tnraj\Downloads\CloudFarm1\CloudFarm\cloudfarm_project\cloudfarm_app\filled_crop_fertilizer_dataset - filled_crop_fertilizer_dataset.csv.csv"
 
 
 def load_and_train_models():

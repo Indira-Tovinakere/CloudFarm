@@ -4,15 +4,18 @@
     <title>Crop and Fertilizer Prediction</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, #76b852, #8dc26f);
-            color: #333;
-        }
+    margin: 0;
+    padding: 0;
+    height: 80vh; /* Full viewport height */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://ideogram.ai/assets/progressive-image/balanced/response/wRnJjoGnQam6YViH1wXBMQ') 
+                no-repeat center center fixed;
+    background-size: cover; /* Ensures the image covers the entire page */
+}
         .container {
-            max-width: 600px;
+            max-width: 450px;
             margin: 50px auto;
+            margin-top: 100px;
             background: #fff;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
@@ -38,14 +41,21 @@
             border-radius: 5px;
         }
         button {
-            background-color: #76b852;
+            background-color: black;
             color: #fff;
             border: none;
             cursor: pointer;
             transition: background 0.3s ease;
+            width: 50%; /* Adjust width as needed */
+            display: block; /* Makes the button take up full block space */
+            margin: 10px auto; /* Centers the button horizontally */
+            padding: 10px; /* Adjust padding for better appearance */
+            text-align: center; /* Ensures the text is centered */
+            border-radius: 5px; /* Optional: Adds rounded corners */
         }
+
         button:hover {
-            background-color: #5a9a41;
+            background-color: black;
         }
         .result {
             margin-top: 20px;
@@ -61,6 +71,21 @@
     </style>
 </head>
 <body>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); padding: 15px 0; z-index: 1000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+        <div style="max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <!-- Logo -->
+            <h1 style="color: #ffffff; font-size: 1.5em; margin: 0;">CloudFarm</h1>
+            <!-- Navigation Links -->
+            <nav>
+                <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
+                <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
+                <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
+                <a href="{% url 'buy_products' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY  FERTILIZERS</a>
+                <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PREDICTION</a>
+                <a href="{% url 'login' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">LOGOUT</a>
+            </nav>
+        </div>
+    </div>
     <div class="container">
         <h1>Crop and Fertilizer Prediction</h1>
         <form method="POST">
