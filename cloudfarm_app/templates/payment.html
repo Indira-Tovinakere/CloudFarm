@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudFarm Payment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('/media/fertilizer_images/payment.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 110vh;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .google-translate {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .google-translate #google_translate_element {
+            color: white;
+        }
+
+        .payment-container {
+            background: rgba(237, 235, 235, 0.9);
+            padding: 20px; /* Reduced padding */
+            border-radius: 12px; /* Slightly reduced radius for a sharper look */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Smaller shadow */
+            width: 70%; /* Reduced width */
+            max-width: 590px; /* Maximum width reduced */
+            margin: 0 auto; /* Center the container */
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-header h1 {
+            font-size: 1.6rem;
+            color: #070707;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .payment-options {
+            margin-bottom: 20px;
+        }
+
+        .payment-options label {
+            display: block;
+            margin: 8px 0;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-group label {
+            margin-bottom: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0a0a0a;
+            width: 40%;
+        }
+
+        .form-group input {
+            width: 55%; /* Make inputs take up less space */
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 12px;
+            font-size: 1rem;
+            margin-bottom: 12px; /* Space between inputs */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #0a0a0a;
+            box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
+        }
+
+        .form-button button {
+            width: 50%; /* Make button the same width as input fields */
+            background: linear-gradient(45deg, #0c0c0c, #070707);
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.4s ease, transform 0.2s ease;
+        }
+
+        .form-button button:hover {
+            background: linear-gradient(45deg, #030303, #0a0a0a);
+            transform: scale(1.1);
+        }
+
+        .qr-code {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .qr-code img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .payment-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .payment-footer p {
+            font-size: 0.9rem;
+            color: #0e0e0e;
+        }
+
+        .payment-footer a {
+            color: #060606;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .payment-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script>
+        function showPaymentForm(option) {
+            const cardForm = document.getElementById('card-form');
+            const qrCode = document.getElementById('qr-code');
+            const codMessage = document.getElementById('cod-message');
+
+            cardForm.style.display = 'none';
+            qrCode.style.display = 'none';
+            codMessage.style.display = 'none';
+
+            if (option === 'card') {
+                cardForm.style.display = 'block';
+            } else if (option === 'gpay') {
+                qrCode.style.display = 'block';
+
+                // Generate QR Code for GPay dynamically
+                const qrCodeContainer = document.getElementById('qr-code-container');
+                qrCodeContainer.innerHTML = ""; // Clear previous QR code if it exists
+
+                const upiUrl = "upi://pay?pa=sample@upi&pn=CloudFarm"; // Replace 'sample@upi' with actual UPI ID
+                QRCode.toCanvas(upiUrl, { width: 200, margin: 2 }, (error, canvas) => {
+                    if (error) console.error(error);
+                    qrCodeContainer.appendChild(canvas);
+                });
+            } else if (option === 'cod') {
+                codMessage.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); padding: 15px 0; z-index: 1000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+        <div style="max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <!-- Logo -->
+            <h1 style="color: #ffffff; font-size: 1.5em; margin: 0;">CloudFarm</h1>
+            <div class="google-translate" style="position: absolute; top: 10px; right: 20px; z-index: 2000;">
+                <div id="google_translate_element"></div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <!-- Navigation Links -->
+            <nav>
+                <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
+                <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
+                <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PREDICTION</a>
+                <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
+                <a href="{% url 'bill' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY  FERTILIZERS</a>
+                <a href="{% url 'payment' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PAYMENT</a>
+                <a href="{% url 'login' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">LOGOUT</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Add Spacing to Avoid Overlapping Content -->
+    <div style="height: 80px;"></div>
+    <div class="payment-container">
+        <div class="payment-header">
+            <h1>Choose Payment Method</h1>
+        </div>
+
+        <!-- Payment Options -->
+        <div class="payment-options">
+            <label><input type="radio" name="payment-method" value="card" onclick="showPaymentForm('card')"> Pay with Card</label>
+            <label><input type="radio" name="payment-method" value="gpay" onclick="showPaymentForm('gpay')"> Pay with GPay</label>
+            <label><input type="radio" name="payment-method" value="cod" onclick="showPaymentForm('cod')"> Cash on Delivery</label>
+        </div>
+
+        <!-- Card Payment Form -->
+        <form id="card-form" class="payment-form" method="POST" action="{% url 'payment' %}" style="display: none;">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" name="card_number" placeholder="Enter your card number" required>
+            </div>
+            <div class="form-group">
+                <label for="expiry-date">Expiry Date</label>
+                <input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YY" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="Enter CVV" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name on Card</label>
+                <input type="text" id="name" name="name" placeholder="Enter name" required>
+            </div>
+            <div class="form-button">
+                <center><button type="submit">Proceed to Payment</button></center>
+            </div>
+        </form>
+
+        <!-- QR Code for GPay -->
+        <div id="qr-code" class="qr-code" style="display: none;">
+            <img src="/media/fertilizer_images/gpay_qr_code.png" alt="QR Code">
+        </div>
+
+        <!-- COD Message -->
+        <div id="cod-message" style="display: none;">
+            <p>Cash on delivery option selected. Thank you for your order!</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="payment-footer">
+            <p>By proceeding, you agree to our <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></p>
+        </div>
+
+        <div class="payment-footer">
+            <p>For payment issues,contact us <a href="{% url 'Aboutus' %}" class="payment-issues-button">Click here</a></p>
+            <!--<a href="{% url 'Aboutus' %}" class="payment-issues-button">About Us</a>-->
+        </div>
+    </div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', // Default language of your webpage
+                includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,my,ca,ceb,zh-CN,zh-TW,co,hr,cs,da,nl,en,eo,et,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,he,hi,hmn,hu,is,ig,id,ga,it,ja,jv,kn,kk,km,rw,ko,ku,ky,lo,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,ne,no,ny,or,ps,fa,pl,pt,pa,ro,ru,sm,gd,sr,st,si,sk,sl,so,es,su,sw,sv,tg,ta,tt,te,th,tr,tk,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu', // All supported languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

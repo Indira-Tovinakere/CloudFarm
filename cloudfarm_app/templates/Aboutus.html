@@ -5,20 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - CloudFarm</title>
 </head>
-<body style="margin: 0; font-family: 'Georgia', serif; color: #2c3e50; background: url('https://ideogram.ai/assets/progressive-image/balanced/response/BZ70hLKIQxyBiLnT_C-hhA') no-repeat center center fixed; background-size: cover;">
+<style>
+    .google-translate {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .google-translate #google_translate_element {
+            color: white;
+        }
+</style>
+<body style="margin: 0; font-family: 'Georgia', serif; color: #2c3e50; background: url('/media/fertilizer_images/aboutus.jpg') no-repeat center center fixed; background-size: cover;">
 
     <!-- Navigation Bar -->
     <div style="position: fixed; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); padding: 15px 0; z-index: 1000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
         <div style="max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
             <!-- Logo -->
             <h1 style="color: #ffffff; font-size: 1.5em; margin: 0;">CloudFarm</h1>
+            
+            <!-- Google Translate Dropdown -->
+            <div class="google-translate" style="position: absolute; top: 10px; right: 20px; z-index: 2000;">
+                <div id="google_translate_element"></div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <!-- Navigation Links -->
-            <nav>
+            <nav style="margin-left: auto;">
                 <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
                 <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
-                <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
-                <a href="{% url 'buy_products' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY  FERTILIZERS</a>
                 <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PREDICTION</a>
+                <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
+                <a href="{% url 'bill' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY FERTILIZERS</a>
+                <a href="{% url 'payment' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PAYMENT</a>
                 <a href="{% url 'login' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">LOGOUT</a>
             </nav>
         </div>
@@ -59,6 +84,18 @@
             </p>
         </div>
     </div>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', // Default language of your webpage
+                includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,my,ca,ceb,zh-CN,zh-TW,co,hr,cs,da,nl,en,eo,et,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,he,hi,hmn,hu,is,ig,id,ga,it,ja,jv,kn,kk,km,rw,ko,ku,ky,lo,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,ne,no,ny,or,ps,fa,pl,pt,pa,ro,ru,sm,gd,sr,st,si,sk,sl,so,es,su,sw,sv,tg,ta,tt,te,th,tr,tk,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu', // All supported languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>

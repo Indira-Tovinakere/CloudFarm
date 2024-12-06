@@ -15,7 +15,8 @@
     
         body {
             font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
-            background: url('https://ideogram.ai/assets/image/lossless/response/m86tdeN_ReqddDgX1QFnMA') no-repeat center center fixed; /* New background image */
+            background: url('/media/fertilizer_images/login.jpg') 
+                        no-repeat center center fixed; /* New background image */
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -25,7 +26,27 @@
             margin: 0;
             background-attachment: fixed;
         }
-    
+
+        .google-translate {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100; /* Ensure it stays above other elements */
+        }
+        
+        .google-translate {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .google-translate #google_translate_element {
+            color: white;
+        }
+
         .login-container {
             background: rgba(187, 186, 186, 0.9); /* Lightly transparent white background */
             border-radius: 12px;
@@ -155,9 +176,12 @@
             }
         }
     </style>
-    
 </head>
 <body>
+     <!-- Google Translate Dropdown -->
+     <div class="google-translate">
+        <div id="google_translate_element"></div>
+    </div>
     <div class="login-container">
         <div class="login-header">
             <h1>CloudFarm Login</h1>
@@ -174,9 +198,6 @@
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
                 <span class="error">{{ password_error }}</span>
             </div>
-            <!--<div class="form-button">
-                <button type="submit">Login<a href="{% url 'home' %}"></a></button>
-            </div>-->
             <div class="login-footer">
                 <p><a href="{% url 'home' %}">Login</a></p>
             </div>
@@ -185,5 +206,30 @@
             <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
         </div>
     </div>
+
+    <script>
+        // JavaScript function to validate the form
+        document.querySelector('.login-footer a').addEventListener('click', function(e) {
+            var email = document.getElementById("number").value;
+            var password = document.getElementById("password").value;
+            
+            // Check if email or password is empty
+            if (email === "" || password === "") {
+                e.preventDefault();  // Prevent the default action (form submission or redirect)
+                alert("Please fill out both the email and password fields.");
+            }
+        });
+    </script>
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', // Default language of your webpage
+                includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,my,ca,ceb,zh-CN,zh-TW,co,hr,cs,da,nl,en,eo,et,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,he,hi,hmn,hu,is,ig,id,ga,it,ja,jv,kn,kk,km,rw,ko,ku,ky,lo,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,ne,no,ny,or,ps,fa,pl,pt,pa,ro,ru,sm,gd,sr,st,si,sk,sl,so,es,su,sw,sv,tg,ta,tt,te,th,tr,tk,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu', // All supported languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

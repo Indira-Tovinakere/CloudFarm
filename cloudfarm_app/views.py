@@ -132,3 +132,95 @@ def remove_from_cart(request, product_id):
     request.session['cart'] = cart
     return redirect('view_cart')
 
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+
+def add_to_cart(request):
+    # Get the cart from the session or initialize an empty list if not present
+    cart = request.session.get('cart', [])
+    
+    # Get product details from the form submission or URL parameters
+    product_id = request.POST.get('product_id')
+    product_name = request.POST.get('product_name')
+    product_price = float(request.POST.get('product_price'))
+    quantity = int(request.POST.get('quantity'))
+
+    # Add the product to the cart
+    cart.append({
+        'id': product_id,
+        'name': product_name,
+        'price': product_price,
+        'quantity': quantity,
+    })
+
+    # Save the updated cart to the session
+    request.session['cart'] = cart
+    request.session.modified = True  # Make sure the session is marked as modified
+
+    # Redirect to the checkout page
+    return redirect('checkout')
+
+def checkout(request):
+    # Retrieve the cart from the session
+    cart = request.session.get('cart', [])
+    
+    # Calculate the total price
+    total_price = sum(item['price'] * item['quantity'] for item in cart)
+
+    # Pass cart items and total price to the template
+    return render(request, 'checkout.html', {'cart_items': cart, 'total_price': total_price})
+
+def clear_cart(request):
+    # Clear the cart from the session after checkout
+    if 'cart' in request.session:
+        del request.session['cart']
+    return redirect('home')
+
+def bill(request):
+    return render(request, 'bill.html')
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+def payment(request):
+    """
+    Render the payment page.
+    """
+    return render(request, 'payment.html')
+
+def process_payment(request):
+    """
+    Handle the payment form submission.
+    """
+    if request.method == 'POST':
+        card_number = request.POST.get('card_number')
+        expiry_date = request.POST.get('expiry_date')
+        cvv = request.POST.get('cvv')
+        cardholder_name = request.POST.get('cardholder_name')
+
+        # Basic validation
+        if not (card_number and expiry_date and cvv and cardholder_name):
+            messages.error(request, "All fields are required!")
+            return redirect('payment_page')
+
+        # Simulate payment processing logic
+        if len(card_number) != 16 or not card_number.isdigit():
+            messages.error(request, "Invalid card number!")
+            return redirect('payment_page')
+
+        if len(cvv) != 3 or not cvv.isdigit():
+            messages.error(request, "Invalid CVV!")
+            return redirect('payment_page')
+
+        # Payment success simulation
+        messages.success(request, "Payment processed successfully!")
+        return redirect('payment_page')  # You can change this to redirect to a success page
+
+    return redirect('payment_page')
+
+def help(request):
+    """
+    Render a simple help page.
+    """
+    return render(request, 'help.html', {'message': 'For payment issues, contact support@example.com'})
+

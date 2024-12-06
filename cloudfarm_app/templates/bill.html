@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Billing Page</title>
+    <style>
+        body {
+            font-family:  'Georgia', serif;
+            background: url('/media/fertilizer_images/buyproducts.jpg') 
+                        no-repeat center center fixed; /* New background image */
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #0d0d0d;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px #f1f0f0;
+        }
+
+        table {
+            width: 70%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: rgba(255, 253, 253, 0.762);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 253, 253, 0.762);
+            color: black;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        th {
+            background-color: rgba(96, 95, 95, 0.3);
+            font-weight: bold;
+            text-shadow: 1px 1px 2px #656464;
+            font-size: 1.5em;
+        }
+
+        td {
+            background-color: rgba(96, 95, 95, 0.3);
+        }
+
+        tr:hover {
+            background-color: rgba(210, 207, 207, 0.686);
+        }
+
+        .total {
+            text-align: right;
+            margin: 20px auto;
+            width: 68%;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: black;
+            text-shadow: 1px 1px 2px#6f6e6e;
+        }
+
+        #total-amount {
+            background-color: rgba(255, 253, 253, 0.762);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: right;
+            box-shadow: 0 4px 8px rgba(96, 95, 95, 0.3);
+        }
+
+        .add-to-cart {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .add-to-cart input {
+            margin: 0 5px;
+            padding: 5px;
+            font-weight: bold;
+        }
+
+        .add-to-cart button {
+            padding: 5px 15px;
+            background-color: #1a1a1a;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .add-to-cart button:hover {
+            background-color: #1a1a1a;
+        }
+
+        .update-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .update-buttons button {
+            padding: 5px 10px;
+            background-color: rgba(210, 207, 207, 0.686);
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.0em;
+        }
+
+        .update-buttons button:hover {
+            background-color: rgba(210, 207, 207, 0.686);
+        }
+    </style>
+</head>
+<body>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); padding: 15px 0; z-index: 1000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+        <div style="max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <!-- Logo -->
+            <h1 style="color: #ffffff; font-size: 1.5em; margin: 0;">CloudFarm</h1>
+            <div class="google-translate" style="position: absolute; top: 10px; right: 20px; z-index: 2000;">
+                <div id="google_translate_element"></div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <!-- Navigation Links -->
+            <nav>
+                <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
+                <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
+                <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PREDICTION</a>
+                <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
+                <a href="{% url 'bill' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY  FERTILIZERS</a>
+                <a href="{% url 'payment' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PAYMENT</a>
+                <a href="{% url 'login' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">LOGOUT</a>
+            </nav>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 100px;">
+    <h1>Billing Summary</h1>
+    <!-- Fertilizer List with Add to Cart Feature -->
+    <div class="add-to-cart">
+        <select id="fertilizer-select">
+            <option value="DAP Fertilizer">DAP Fertilizer</option>
+            <option value="MOP Fertilizer">MOP Fertilizer</option>
+            <option value="SSP Fertilizer">SSP Fertilizer</option>
+            <option value="Urea Fertilizer">Urea Fertilizer</option>
+            <option value="10:10:10 Fertilizer">10:10:10 Fertilizer</option>
+            <option value="10:26:26 Fertilizer">10:26:26 Fertilizer</option>
+            <option value="12:32:16 Fertilizer">12:32:16 Fertilizer</option>
+            <option value="19:19:19 Fertilizer">19:19:19 Fertilizer</option>
+            <option value="20:20:20 Fertilizer">20:20:20 Fertilizer</option>
+            <option value="Ammonium Sulphate Fertilizer">Ammonium Sulphate Fertilizer</option>
+            <option value="Ferrous Sulphate Fertilizer">Ferrous Sulphate Fertilizer</option>
+            <option value="Hydrated Lime Fertilizer">Hydrated Lime Fertilizer</option>
+            <option value="Magnesium Sulphate Fertilizer">Magnesium Sulphate Fertilizer</option>
+            <option value="Sulphur Fertilizer">Sulphur Fertilizer</option>
+            <option value="White Potash Fertilizer">White Potash Fertilizer</option>
+            <option value="Chilated-iron Fertilizer">Chilated-iron Fertilizer</option>
+            <option value="Chelated-Foliar-Grade 2 Fertilizer">Chelated-Foliar-Grade 2 Fertilizer</option>
+            <option value="Chelated-Zinc Fertilizer">Chelated-Zinc Fertilizer</option>
+            <option value="Chilated Foilar Fertilizer">Chilated Foilar Fertilizer</option>
+        </select>
+        <input type="number" id="quantity" placeholder="Quantity" min="1" />
+        <button id="add-to-cart">Add to Cart</button>
+    </div>
+
+    <!-- Table for Billing -->
+    <table>
+        <thead>
+            <tr>
+                <th>Fertilizer</th>
+                <th>Quantity</th>
+                <th>Price (₹)</th>
+                <th>Subtotal (₹)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="billing-table">
+            <!-- Items will be added dynamically here -->
+        </tbody>
+    </table>
+
+    <!-- Total Amount -->
+    <div class="total">
+        <span id="total-amount">Total: ₹0</span>
+    </div>
+    </div>
+
+    <script>
+        const priceList = {
+            "DAP Fertilizer": 50,
+            "MOP Fertilizer": 60,
+            "SSP Fertilizer": 55,
+            "Urea Fertilizer": 40,
+            "10:10:10 Fertilizer": 70,
+            "10:26:26 Fertilizer": 75,
+            "12:32:16 Fertilizer": 80,
+            "19:19:19 Fertilizer": 85,
+            "20:20:20 Fertilizer": 90,
+            "Ammonium Sulphate Fertilizer": 65,
+            "Ferrous Sulphate Fertilizer": 72,
+            "Hydrated Lime Fertilizer": 45,
+            "Magnesium Sulphate Fertilizer": 60,
+            "Sulphur Fertilizer": 50,
+            "White Potash Fertilizer": 55,
+            "Chilated-iron Fertilizer": 65,
+            "Chelated-Foliar-Grade 2 Fertilizer": 70,
+            "Chelated-Zinc Fertilizer": 80,
+            "Chilated Foilar Fertilizer": 75,
+        };
+
+        const cart = {};
+
+        // Handle Add to Cart button click
+        document.getElementById('add-to-cart').addEventListener('click', () => {
+            const fertilizer = document.getElementById('fertilizer-select').value;
+            const quantity = parseInt(document.getElementById('quantity').value) || 0;
+
+            if (quantity > 0) {
+                if (cart[fertilizer]) {
+                    cart[fertilizer] += quantity;
+                } else {
+                    cart[fertilizer] = quantity;
+                }
+                renderBillingTable();
+            } else {
+                alert("Please enter a valid quantity.");
+            }
+        });
+
+        const renderBillingTable = () => {
+            const billingTable = document.getElementById('billing-table');
+            billingTable.innerHTML = ''; // Clear existing table rows
+            let totalAmount = 0;
+
+            // First, create an array of products from the cart and sort them by the quantity added to cart (newly added items should appear first)
+            const sortedProducts = Object.keys(cart).sort((a, b) => {
+                // New items (non-zero quantity) should come first
+                return cart[b] - cart[a]; // Sort in descending order of quantity
+            });
+
+            // Loop through all sorted products and add them to the table
+            sortedProducts.forEach(product => {
+                const quantity = cart[product] || 0;
+                const price = priceList[product];
+                const subtotal = price * quantity;
+
+                // Create a table row for each fertilizer
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product}</td>
+                    <td>${quantity}</td>
+                    <td>${price}</td>
+                    <td>${subtotal}</td>
+                    <td>
+                        <div class="update-buttons">
+                            <button onclick="reduceQuantity('${product}')">Reduce</button>
+                            <button onclick="removeItem('${product}')">Remove</button>
+                        </div>
+                    </td>
+                `;
+                billingTable.appendChild(row);
+
+                // Add to total amount if the quantity is greater than 0
+                if (quantity > 0) {
+                    totalAmount += subtotal;
+                }
+            });
+
+            // Display the total amount
+            document.getElementById('total-amount').textContent = `Total: ₹${totalAmount}`;
+        };
+
+        // Reduce Quantity
+        function reduceQuantity(product) {
+            if (cart[product] > 1) {
+                cart[product] -= 1;
+            } else {
+                delete cart[product];
+            }
+            renderBillingTable();
+        }
+
+        // Remove Item
+        function removeItem(product) {
+            delete cart[product];
+            renderBillingTable();
+
+        }
+        const paymentButton = document.createElement('button');
+            paymentButton.textContent = 'Proceed to Payment';
+            paymentButton.style = 'margin: 20px auto; display: block; padding: 20px 20px; background-color: #1a1a1a; color: #fff; border: none; border-radius: 15px; cursor: pointer;';
+            paymentButton.addEventListener('click', () => {
+                window.location.href = "/payment"; // Redirects to payment page
+            });
+            document.body.appendChild(paymentButton);
+    </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', // Default language of your webpage
+                includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,my,ca,ceb,zh-CN,zh-TW,co,hr,cs,da,nl,en,eo,et,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,he,hi,hmn,hu,is,ig,id,ga,it,ja,jv,kn,kk,km,rw,ko,ku,ky,lo,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,ne,no,ny,or,ps,fa,pl,pt,pa,ro,ru,sm,gd,sr,st,si,sk,sl,so,es,su,sw,sv,tg,ta,tt,te,th,tr,tk,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu', // All supported languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

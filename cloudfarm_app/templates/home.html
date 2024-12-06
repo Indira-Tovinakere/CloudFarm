@@ -16,7 +16,7 @@
         body {
             font-family: 'Lora', serif;
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://files.oaiusercontent.com/file-EztGSAfZyo6JbjvinxJUVG?se=2024-11-23T13%3A08%3A39Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D76f6a2cf-b756-4bfe-bf12-0194e99572c2.webp&sig=UHYg2TO%2BB/xe4rWSks%2BV5S9laZbbj/aDjC%2BJDhTvACg%3D') 
+                        url('/media/fertilizer_images/home.jpg') 
                         no-repeat center center fixed;
             background-size: cover;
             color: #fff;
@@ -137,18 +137,38 @@
             color: #6A9D3E;
             font-weight: 600;
         }
+
+        /* Google Translate Dropdown */
+        .google-translate {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .google-translate #google_translate_element {
+            color: white;
+        }
     </style>
 </head>
 <body>
+    <!-- Google Translate Dropdown -->
+    <div class="google-translate">
+        <div id="google_translate_element"></div>
+    </div>
+    <br>
     <h1>Welcome to the Agriculture Hub</h1>
     
     <!-- Navigation Links -->
     <nav>
         <a href="{% url 'home' %}">Home</a>
         <a href="{% url 'Aboutus' %}">About Us</a>
-        <a href="{% url 'fertilizer_list' %}">Fertilizers</a>
-        <a href="{% url 'buy_products' %}">Buy  FERTILIZERS</a>
         <a href="{% url 'prediction' %}">Prediction</a>
+        <a href="{% url 'fertilizer_list' %}">Fertilizers</a>
+        <a href="{% url 'bill' %}">Buy  FERTILIZERS</a>
+        <a href="{% url 'payment' %}">Payment</a>
         <a href="{% url 'login' %}">Logout</a>
     </nav>
 
@@ -156,25 +176,21 @@
         <button>Explore Our Products</button>
     </a>
 
-    <!-- Fertilizer Cards Section -->
-    <!--<div class="fertilizer-cards">
-        <div class="fertilizer-card">
-            <img src="/static/images/fertilizer1.jpg" alt="Fertilizer 1">
-            <h3>Organic Fertilizer</h3>
-        </div>
-        <div class="fertilizer-card">
-            <img src="/static/images/fertilizer2.jpg" alt="Fertilizer 2">
-            <h3>Potassium Fertilizer</h3>
-        </div>
-        <div class="fertilizer-card">
-            <img src="/static/images/fertilizer3.jpg" alt="Fertilizer 3">
-            <h3>Phosphorus Fertilizer</h3>-->
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer>
         <p>Powered by <a href="#">Your Agriculture Hub</a></p>
     </footer>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', // Default language of your webpage
+                includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,my,ca,ceb,zh-CN,zh-TW,co,hr,cs,da,nl,en,eo,et,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,he,hi,hmn,hu,is,ig,id,ga,it,ja,jv,kn,kk,km,rw,ko,ku,ky,lo,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,ne,no,ny,or,ps,fa,pl,pt,pa,ro,ru,sm,gd,sr,st,si,sk,sl,so,es,su,sw,sv,tg,ta,tt,te,th,tr,tk,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu', // All supported languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

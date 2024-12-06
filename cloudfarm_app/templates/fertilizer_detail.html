@@ -13,12 +13,25 @@
             color: #1e293b; /* Dark slate gray for text */
             margin: 0;
             padding: 0;
-            background: url('https://ideogram.ai/assets/progressive-image/balanced/response/i1brnXsXSgOcrEq5oGOHRQ') no-repeat center center fixed;
+            background: url('/media/fertilizer_images/fertilizerdetails.jpg') no-repeat center center fixed;
             background-size: cover;
             background-blend-mode: overlay;
             background-color: rgba(163, 160, 160, 0.95); /* Light soft overlay */
         }
-    
+
+        .google-translate {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .google-translate #google_translate_element {
+            color: white;
+        }
+
         .container {
             max-width: 350px; /* Reduced size for compact content */
             margin: 50px auto;
@@ -100,6 +113,10 @@
     
 </head>
 <body>
+    <!-- Google Translate Dropdown -->
+    <div class="google-translate">
+        <div id="google_translate_element"></div>
+    </div>
     <div class="container">
         <h1>{{ fertilizer.name }}</h1>
 
@@ -115,5 +132,16 @@
 
         <a href="{% url 'fertilizer_list' %}" class="back-button">Back to List</a>
     </div>
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', // Default language of your webpage
+                includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,my,ca,ceb,zh-CN,zh-TW,co,hr,cs,da,nl,en,eo,et,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,he,hi,hmn,hu,is,ig,id,ga,it,ja,jv,kn,kk,km,rw,ko,ku,ky,lo,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,ne,no,ny,or,ps,fa,pl,pt,pa,ro,ru,sm,gd,sr,st,si,sk,sl,so,es,su,sw,sv,tg,ta,tt,te,th,tr,tk,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu', // All supported languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
