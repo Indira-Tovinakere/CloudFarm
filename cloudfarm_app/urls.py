@@ -24,6 +24,9 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
     path('process_payment/', views.process_payment, name='process_payment'),
     path('help/', views.help, name='help'),
+    path('croptable/', views.croptable, name='croptable'),
+    
+    
     
 ]
 

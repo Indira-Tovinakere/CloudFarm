@@ -106,10 +106,11 @@
             <nav>
                 <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
                 <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
+                <a href="{% url 'croptable' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">-</a>
                 <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PREDICTION</a>
                 <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
                 <a href="{% url 'bill' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY  FERTILIZERS</a>
-                <a href="{% url 'payment' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PAYMENT</a>
+                <!--<a href="{% url 'payment' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PAYMENT</a>-->
                 <a href="{% url 'login' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">LOGOUT</a>
             </nav>
         </div>
@@ -121,19 +122,19 @@
         <form method="POST">
             {% csrf_token %}
             <label for="nitrogen">Nitrogen (N):</label>
-            <input type="number" step="0.01" min="0" max="1" name="nitrogen" value="{{ request.POST.nitrogen }}" required>
+            <input type="number" placeholder="Enter values between 0 and 1" step="0.01" min="0" max="1" name="nitrogen" value="{{ request.POST.nitrogen }}" required>
 
             <label for="phosphorus">Phosphorus (P):</label>
-            <input type="number" step="0.01" min="0" max="1" name="phosphorus" value="{{ request.POST.phosphorus }}" required>
+            <input type="number" placeholder="Enter values between 0 and 1" step="0.01" min="0" max="1" name="phosphorus" value="{{ request.POST.phosphorus }}" required>
 
             <label for="potassium">Potassium (K):</label>
-            <input type="number" step="0.01" min="0" max="1" name="potassium" value="{{ request.POST.potassium }}" required>
+            <input type="number" placeholder="Enter values between 0 and 1" step="0.01" min="0" max="1" name="potassium" value="{{ request.POST.potassium }}" required>
 
-            <label for="rainfall">Rainfall:</label>
-            <input type="number" step="0.01" min="0" max="1" name="rainfall" value="{{ request.POST.rainfall }}" required>
+            <label for="rainfall">Rainfall (mm):</label>
+            <input type="number" placeholder="Enter values between 0 and 1" step="0.01" min="0" max="1" name="rainfall" value="{{ request.POST.rainfall }}" required>
 
             <label for="ph">pH:</label>
-            <input type="number" step="0.01" min="0" max="12" name="ph" value="{{ request.POST.ph }}" required>
+            <input type="number" placeholder="Enter values between 0 and 12" step="0.01" min="0" max="12" name="ph" value="{{ request.POST.ph }}" required>
 
             <button type="submit">Predict</button>
         </form>

@@ -224,3 +224,33 @@ def help(request):
     """
     return render(request, 'help.html', {'message': 'For payment issues, contact support@example.com'})
 
+from django.shortcuts import render
+import pandas as pd
+
+# Path to your dataset
+DATASET_PATH = r"C:\Users\tnraj\Downloads\CloudFarm1\CloudFarm\cloudfarm_project\cloudfarm_app\filled_crop_fertilizer_dataset - filled_crop_fertilizer_dataset.csv.csv"
+
+def croptable(request):
+    # Load dataset
+    data = pd.read_csv(DATASET_PATH)
+    data = data.drop(columns=["humidity"], errors="ignore")  # Drop 'humidity' if present
+
+    # Get the crop name from the search form
+    query = request.GET.get('crop_name', '').strip().lower()
+
+    # Filter dataset for the entered crop name
+    filtered_data = data[data['label'].str.lower().str.contains(query)] if query else None
+
+    # Prepare context: Only get the first result for simplicity
+    result = None
+    if filtered_data is not None and not filtered_data.empty:
+        result = filtered_data.iloc[0]  # Get the first matching row
+
+    context = {
+        "result": result.to_dict() if result is not None else None,
+        "query": query,
+    }
+
+    # Render the search page
+    return render(request, "croptable.html", context)
+

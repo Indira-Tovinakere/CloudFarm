@@ -39,18 +39,18 @@
         }
 
         .payment-container {
-    background: rgba(237, 235, 235, 0.9);
-    padding: 10px; /* Reduced padding for a slimmer look */
-    border-radius: 12px; /* Slightly reduced radius for a sharper look */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Smaller shadow */
-    width: 70%; /* Reduced width */
-    max-width: 590px; /* Maximum width reduced */
-    margin: 0 auto; /* Center the container */
-    animation: fadeIn 1.5s ease-in-out;
-    height: auto; /* Automatically adjust based on content */
-    max-height: 400px; /* Optional: Set a maximum height to constrain the size */
-    overflow-y: auto; /* Add scrolling if the content exceeds the max height */
-}
+        background: rgba(237, 235, 235, 0.9);
+        padding: 10px; /* Reduced padding for a slimmer look */
+        border-radius: 12px; /* Slightly reduced radius for a sharper look */
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Smaller shadow */
+        width: 70%; /* Reduced width */
+        max-width: 590px; /* Maximum width reduced */
+        margin: 0 auto; /* Center the container */
+        animation: fadeIn 1.5s ease-in-out;
+        height: auto; /* Automatically adjust based on content */
+        max-height: 400px; /* Optional: Set a maximum height to constrain the size */
+        overflow-y: auto; /* Add scrolling if the content exceeds the max height */
+        }
 
 
         .payment-header {
@@ -212,6 +212,7 @@
             <nav>
                 <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
                 <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
+                <a href="{% url 'croptable' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">-</a>
                 <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PREDICTION</a>
                 <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
                 <a href="{% url 'bill' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY  FERTILIZERS</a>
@@ -261,7 +262,7 @@
 
         <!-- QR Code for GPay -->
         <div id="qr-code" class="qr-code" style="display: none;">
-            <img src="/media/fertilizer_images/gpay_qr_code.png" alt="QR Code">
+            <img src="/media/fertilizer_images/upi_payment_to_cloudfarm.png" alt="QR Code">
         </div>
 
         <!-- COD Message -->

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop and Fertilizer Search</title>
+    <style>
+        /* General body styling with background image */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('/media/fertilizer_images/croptable.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+    
+        /* Overlay for better readability */
+        body:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+        .google-translate {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 100; /* Ensure it stays above other elements */
+        }
+
+        .google-translate {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .google-translate #google_translate_element {
+            color: rgb(16, 16, 16);
+        }
+
+        /* Page title styling with animation */
+        h1 {
+            text-align: center;
+            color: #fcfbfb;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+            letter-spacing: 4px;
+            animation: fadeInTitle 2s ease-in-out;
+            margin: 30px 0;
+        }
+    
+        /* Animation for title */
+        @keyframes fadeInTitle {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        /* Centered form styling */
+        form {
+            text-align: center;
+            margin: 30px 0;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+    
+        /* Input text styling with transition effect */
+        input[type="text"] {
+            width: 350px;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid rgba(22, 22, 22, 0.8);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            color: #333;
+            outline: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+        }
+    
+        input[type="text"]:focus {
+            transform: scale(1.05);
+            border: 2px solid #050505;
+            box-shadow: 0 10px 25px rgba(6, 6, 6, 0.7);
+        }
+    
+        /* Submit button styling with hover effect */
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #7c7b7b;
+            background: linear-gradient(to right, black);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    
+        input[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(21, 20, 20, 0.6);
+            background: linear-gradient(to right, black);
+        }
+    
+        /* Results section styling */
+        .result {
+            text-align: left;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.8); /* Whitish background */
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+    
+        /* Animation for results box */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        .result p {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    
+        /* Align the values in the same line */
+        .result p span {
+            color: #3a3b3a;
+            font-weight: normal;
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+    
+        /* Error message styling */
+        .error {
+            text-align: center;
+            color: #3f3f3f;
+            font-size: 18px;
+            margin-top: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+    
+        /* Error message animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    
+        .error p {
+            background-color: rgba(21, 20, 20, 0.9);
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            border: 2px solid #1a1919;
+            font-weight: bold;
+            color: white;
+        }
+    
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            input[type="text"] {
+                width: 80%;
+            }
+    
+            input[type="submit"] {
+                width: 80%;
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+    
+            .result {
+                padding: 20px;
+                font-size: 90%;
+            }
+    
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+    </style>    
+</head>
+<body>
+    <div style="position: fixed; top: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); padding: 15px 0; z-index: 1000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+        <!-- Google Translate Dropdown -->
+     <div class="google-translate">
+        <div id="google_translate_element"></div>
+    </div>
+    <br>
+    <br>
+    <br>
+        <div style="max-width: 1250px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <h1 style="color: #ffffff; font-size: 1.5em; margin: 0;">CloudFarm</h1>
+            <nav>
+                <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
+                <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
+                <a href="{% url 'croptable' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">-</a>
+                <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PREDICTION</a>
+                <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
+                <a href="{% url 'bill' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY  FERTILIZERS</a>
+                <!--<a href="{% url 'payment' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PAYMENT</a>-->
+                <a href="{% url 'login' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">LOGOUT</a>
+            </nav>
+        </div>
+    </div>
+    <h1>Crop and Fertilizer Search</h1>
+    <form method="get">
+        <input type="text" name="crop_name" placeholder="Type the crop name..." value="{{ query|default:'' }}">
+        <input type="submit" value="Search">
+    </form>
+
+    {% if result %}
+        <div class="result">
+            <p><strong>Best Fertilizer:</strong> {{ result.Fertilizer }}</p>
+            <p><strong>N:</strong> {{ result.N }}</p>
+            <p><strong>P:</strong> {{ result.P }}</p>
+            <p><strong>K:</strong> {{ result.K }}</p>
+            <p><strong>pH:</strong> {{ result.ph }}</p>
+            <!--<p><strong>Rainfall:</strong> {{ result.rainfall }} mm</p>-->
+        </div>
+    {% elif query %}
+        <div class="error">
+            <p>No results found for "{{ query }}".</p>
+        </div>
+    {% endif %}
+     <!-- Google Translate Script -->
+     <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en', // Default language of your webpage
+                includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,my,ca,ceb,zh-CN,zh-TW,co,hr,cs,da,nl,en,eo,et,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,he,hi,hmn,hu,is,ig,id,ga,it,ja,jv,kn,kk,km,rw,ko,ku,ky,lo,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,ne,no,ny,or,ps,fa,pl,pt,pa,ro,ru,sm,gd,sr,st,si,sk,sl,so,es,su,sw,sv,tg,ta,tt,te,th,tr,tk,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu', // All supported languages
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
