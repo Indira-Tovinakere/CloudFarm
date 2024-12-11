@@ -212,8 +212,8 @@
             <nav>
                 <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
                 <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
-                <a href="{% url 'croptable' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">-</a>
-                <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PREDICTION</a>
+                <a href="{% url 'croptable' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">YIELDUP</a>
+                <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">CROPBUDDY</a>
                 <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
                 <a href="{% url 'bill' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY  FERTILIZERS</a>
                 <a href="{% url 'payment' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PAYMENT</a>
@@ -237,28 +237,32 @@
         </div>
     
         <!-- Card Payment Form -->
-        <form id="card-form" class="payment-form" method="POST" action="{% url 'payment' %}" style="display: none;">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="card-number">Card Number</label>
-                <input type="text" id="card-number" name="card_number" placeholder="Enter your card number" required>
-            </div>
-            <div class="form-group">
-                <label for="expiry-date">Expiry Date</label>
-                <input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YY" required>
-            </div>
-            <div class="form-group">
-                <label for="cvv">CVV</label>
-                <input type="text" id="cvv" name="cvv" placeholder="Enter CVV" required>
-            </div>
-            <div class="form-group">
-                <label for="name">Name on Card</label>
-                <input type="text" id="name" name="name" placeholder="Enter name" required>
-            </div>
-            <div class="form-button">
-                <center><button type="submit">Proceed to Payment</button></center>
-            </div>
-        </form>
+        <form id="card-form" class="payment-form" method="POST" action="{% url 'thank_you' %}" style="display: none;">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="card-number">Card Number</label>
+        <input type="text" id="card-number" name="card_number" placeholder="Enter your card number" required>
+    </div>
+    <div class="form-group">
+        <label for="expiry-date">Expiry Date</label>
+        <input type="text" id="expiry-date" name="expiry_date" placeholder="DD/MM/YY" required>
+    </div>
+    <div class="form-group">
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" name="cvv" placeholder="Enter CVV" required>
+    </div>
+    <div class="form-group">
+        <label for="name">Name on Card</label>
+        <input type="text" id="name" name="name" placeholder="Enter name" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    </div>
+    <div class="form-button">
+        <center><button type="submit">Proceed to Payment</button></center>
+    </div>
+</form>
 
         <!-- QR Code for GPay -->
         <div id="qr-code" class="qr-code" style="display: none;">
@@ -290,5 +294,51 @@
         }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- JavaScript for Form Validation -->
+<script>
+    document.getElementById('card-form').addEventListener('submit', function(e) {
+        // Card number validation
+        var cardNumber = document.getElementById('card-number').value;
+        if (!/^\d+$/.test(cardNumber)) {
+            alert("Card number should contain only digits.");
+            e.preventDefault();  // Prevent form submission
+            return false;
+        }
+
+        // Expiry date validation (MM/YY format)
+        var expiryDate = document.getElementById('expiry-date').value;
+        if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate)) {
+            alert("Expiry date must be in the format MM/YY.");
+            e.preventDefault();  // Prevent form submission
+            return false;
+        }
+
+        // CVV validation (3 digits)
+        var cvv = document.getElementById('cvv').value;
+        if (!/^\d{3}$/.test(cvv)) {
+            alert("CVV must be a 3-digit number.");
+            e.preventDefault();  // Prevent form submission
+            return false;
+        }
+
+        // Name validation (letters only)
+        var name = document.getElementById('name').value;
+        if (!/^[a-zA-Z\s]+$/.test(name)) {
+            alert("Name should contain only letters and spaces.");
+            e.preventDefault();  // Prevent form submission
+            return false;
+        }
+
+        // Email validation (basic check)
+        var email = document.getElementById('email').value;
+        if (!/\S+@\S+\.\S+/.test(email)) {
+            alert("Please enter a valid email address.");
+            e.preventDefault();  // Prevent form submission
+            return false;
+        }
+    });
+</script>
+
 </body>
 </html>

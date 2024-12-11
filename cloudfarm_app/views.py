@@ -3,6 +3,10 @@ from django.contrib import messages
 from .models import UserRegistration, UserLogin
 from .models import Fertilizer
 
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.conf import settings
+
 
 def register(request):
     if request.method == 'POST':
@@ -188,41 +192,48 @@ def payment(request):
     """
     return render(request, 'payment.html')
 
-def process_payment(request):
-    """
-    Handle the payment form submission.
-    """
+def thank_you(request):
     if request.method == 'POST':
         card_number = request.POST.get('card_number')
         expiry_date = request.POST.get('expiry_date')
         cvv = request.POST.get('cvv')
-        cardholder_name = request.POST.get('cardholder_name')
+        name = request.POST.get('name')
+        email = request.POST.get('email')
 
-        # Basic validation
-        if not (card_number and expiry_date and cvv and cardholder_name):
-            messages.error(request, "All fields are required!")
-            return redirect('payment_page')
+        # Assuming payment processing logic goes here and succeeds
+        payment_status = True
 
-        # Simulate payment processing logic
-        if len(card_number) != 16 or not card_number.isdigit():
-            messages.error(request, "Invalid card number!")
-            return redirect('payment_page')
+        if payment_status:
+            # Generate a simple bill
+            bill_details = f"""
+            Thank you for your payment.
+            --------------------------
+            Name: {name}
+            Card Number: **** **** **** {card_number[-4:]}
+            Expiry Date: {expiry_date}
+            Amount Paid: ₹100 
+            --------------------------
+            """
 
-        if len(cvv) != 3 or not cvv.isdigit():
-            messages.error(request, "Invalid CVV!")
-            return redirect('payment_page')
+            # Send email to user
+            send_mail(
+                'Payment Receipt - CloudFarm',
+                bill_details,
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+            )
 
-        # Payment success simulation
-        messages.success(request, "Payment processed successfully!")
-        return redirect('payment_page')  # You can change this to redirect to a success page
-
-    return redirect('payment_page')
+            return render(request, 'thank_you.html', {'email': email})
+        # else:
+        #     return render(request, 'payment_failed.html')
 
 def help(request):
     """
     Render a simple help page.
     """
     return render(request, 'help.html', {'message': 'For payment issues, contact support@example.com'})
+
 
 from django.shortcuts import render
 import pandas as pd
@@ -254,3 +265,5 @@ def croptable(request):
     # Render the search page
     return render(request, "croptable.html", context)
 
+# def thank_you(request):
+#     return render(request, 'thank_you.html')

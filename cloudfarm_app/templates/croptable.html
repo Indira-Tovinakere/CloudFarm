@@ -231,8 +231,8 @@
             <nav>
                 <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
                 <a href="{% url 'Aboutus' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">ABOUT US</a>
-                <a href="{% url 'croptable' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">-</a>
-                <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PREDICTION</a>
+                <a href="{% url 'croptable' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">YIELDUP</a>
+                <a href="{% url 'prediction' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">CROPBUDDY</a>
                 <a href="{% url 'fertilizer_list' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">FERTILIZERS</a>
                 <a href="{% url 'bill' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">BUY  FERTILIZERS</a>
                 <!--<a href="{% url 'payment' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">PAYMENT</a>-->
@@ -249,10 +249,10 @@
     {% if result %}
         <div class="result">
             <p><strong>Best Fertilizer:</strong> {{ result.Fertilizer }}</p>
-            <p><strong>N:</strong> {{ result.N }}</p>
-            <p><strong>P:</strong> {{ result.P }}</p>
-            <p><strong>K:</strong> {{ result.K }}</p>
-            <p><strong>pH:</strong> {{ result.ph }}</p>
+            <p><strong>N:</strong> {{ result.N|floatformat:2}}</p>
+            <p><strong>P:</strong> {{ result.P|floatformat:2 }}</p>
+            <p><strong>K:</strong> {{ result.K|floatformat:2}}</p>
+            <p><strong>pH:</strong> {{ result.ph|floatformat:2 }}</p>
             <!--<p><strong>Rainfall:</strong> {{ result.rainfall }} mm</p>-->
         </div>
     {% elif query %}
