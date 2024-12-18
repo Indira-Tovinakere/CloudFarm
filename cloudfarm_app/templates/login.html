@@ -11,8 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-    
+        } 
         body {
             font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
             background: url('/media/fertilizer_images/login.jpg') 
@@ -26,14 +25,12 @@
             margin: 0;
             background-attachment: fixed;
         }
-
         .google-translate {
             position: absolute;
             top: 10px;
             right: 10px;
             z-index: 100; /* Ensure it stays above other elements */
         }
-        
         .google-translate {
             position: absolute;
             top: 20px;
@@ -42,11 +39,9 @@
             padding: 10px;
             border-radius: 8px;
         }
-
         .google-translate #google_translate_element {
             color: white;
         }
-
         .login-container {
             background: rgba(187, 186, 186, 0.9); /* Lightly transparent white background */
             border-radius: 12px;
@@ -55,26 +50,22 @@
             width: 80%;
             max-width: 400px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-    
+        } 
         .login-container:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-    
+        }   
         .login-header {
             text-align: center;
             margin-bottom: 25px;
-        }
-    
+        }    
         .login-header h1 {
             font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
             font-size: 1.5rem;
             color: #4e8a74; /* Soft green color for header */
             font-weight: 600;
             letter-spacing: 1px;
-        }
-    
+        }    
         .login-form {
             display: flex;
             flex-direction: column;
@@ -83,16 +74,14 @@
     
         .form-group {
             margin-bottom: 18px;
-        }
-    
+        }    
         .form-group label {
             display: block;
             font-weight: 600;
             margin-bottom: 6px;
             font-size: 1.0rem;
             color: #4e8a74; /* Soft green text */
-        }
-    
+        }    
         .form-group input {
             width: 100%;
             padding: 12px;
@@ -101,24 +90,20 @@
             font-size: 1.0rem;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
             font-family: 'Poppins', sans-serif; /* Matching input font style */
-        }
-    
+        }   
         .form-group input:focus {
             outline: none;
             border-color: #4e8a74; /* Soft green focus border */
             box-shadow: 0 0 8px rgba(116, 116, 116, 0.4); /* Soft green glow */
-        }
-    
+        }    
         .form-group span.error {
             color: #494848;
             font-size: 12px;
             margin-top: 5px;
-        }
-    
+        }   
         .form-button {
             text-align: center;
-        }
-    
+        }    
         .form-button button {
             background-color: #4e8a74; /* Soft green button */
             color: rgb(74, 73, 73);
@@ -129,48 +114,49 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             font-family: 'Poppins', sans-serif;
-        }
-    
+        }    
         .form-button button:hover {
             background-color: #3a3b3b; /* Darker green on hover */
             transform: scale(1.05); /* Slight button scale effect */
-        }
-    
+        }   
         .login-footer {
             text-align: center;
             margin-top: 30px;
         }
-    
         .login-footer p {
             font-size: 1rem;
             color: #6d6c6c;
-        }
-    
+        }   
         .login-footer a {
             color: #4e8a74;
             text-decoration: none;
             font-weight: bold;
             transition: text-decoration 0.3s ease;
         }
-    
         .login-footer a:hover {
             text-decoration: underline;
+        }    
+
+        /* Error message styling */
+        .alert {
+            padding: 10px;
+            background-color: #f8d7da;
+            color: #721c24;
+            margin-bottom: 20px;
+            border-radius: 5px;
         }
-    
+
         /* Responsive Design */
         @media (max-width: 480px) {
             .login-container {
                 padding: 35px;
-            }
-    
+            }   
             .login-header h1 {
                 font-size: 1.3rem;
-            }
-    
+            }    
             .form-group label {
                 font-size: 1rem;
-            }
-    
+            }    
             .form-button button {
                 font-size: 1rem;
             }
@@ -178,20 +164,30 @@
     </style>
 </head>
 <body>
-     <!-- Google Translate Dropdown -->
-     <div class="google-translate">
+    <!-- Google Translate Dropdown -->
+    <div class="google-translate">
         <div id="google_translate_element"></div>
     </div>
+
     <div class="login-container">
         <div class="login-header">
             <h1>CloudFarm Login</h1>
         </div>
+        
+        {% if messages %}
+            <div class="alert">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <form class="login-form" method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             <div class="form-group">
-                <label for="number">Email id</label>
-                <input type="text" id="number" name="number" placeholder="Enter your 10-digit phone number" required>
-                <span class="error">{{ number_error }}</span>
+                <label for="email">Email id</label>
+                <input type="email" id="email" name="email" placeholder="Enter valid e-mail id" required>
+                <span class="error">{{ email_error }}</span>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
@@ -202,6 +198,7 @@
                 <p><a href="{% url 'home' %}">Login</a></p>
             </div>
         </form>
+
         <div class="login-footer">
             <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
         </div>
@@ -210,16 +207,26 @@
     <script>
         // JavaScript function to validate the form
         document.querySelector('.login-footer a').addEventListener('click', function(e) {
-            var email = document.getElementById("number").value;
+            var email = document.getElementById("email").value;
             var password = document.getElementById("password").value;
             
             // Check if email or password is empty
             if (email === "" || password === "") {
                 e.preventDefault();  // Prevent the default action (form submission or redirect)
                 alert("Please fill out both the email and password fields.");
+                return;
+            }
+
+            // Basic email pattern check
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                e.preventDefault();  // Prevent the default action
+                alert("Please enter a valid email id.");
+                return;
             }
         });
     </script>
+
     <!-- Google Translate Script -->
     <script type="text/javascript">
         function googleTranslateElementInit() {

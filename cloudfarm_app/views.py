@@ -37,17 +37,18 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        number = request.POST['number']
+        email = request.POST['email']
         password = request.POST['password']
 
         try:
-            user = UserRegistration.objects.get(number=number, password=password)
+            user = UserRegistration.objects.get(email=email, password=password)
             messages.success(request, f"Welcome back, {user.name}!")
             return redirect('dashboard')  # Redirect to the dashboard or homepage
         except UserRegistration.DoesNotExist:
             messages.error(request, "Invalid login credentials!")
             return redirect('login')
     return render(request, 'login.html')
+
 
 # ML INTEGRATION
 
@@ -242,9 +243,16 @@ import pandas as pd
 DATASET_PATH = r"C:\Users\tnraj\Downloads\CloudFarm1\CloudFarm\cloudfarm_project\cloudfarm_app\filled_crop_fertilizer_dataset - filled_crop_fertilizer_dataset.csv.csv"
 
 def croptable(request):
+    import pandas as pd  # Ensure pandas is imported
     # Load dataset
     data = pd.read_csv(DATASET_PATH)
     data = data.drop(columns=["humidity"], errors="ignore")  # Drop 'humidity' if present
+
+    # Ensure N, P, K, and pH values are positive
+    columns_to_fix = ['N', 'P', 'K', 'ph']
+    for col in columns_to_fix:
+        if col in data.columns:
+            data[col] = data[col].abs()  # Convert negative values to positive
 
     # Get the crop name from the search form
     query = request.GET.get('crop_name', '').strip().lower()
@@ -255,7 +263,7 @@ def croptable(request):
     # Prepare context: Only get the first result for simplicity
     result = None
     if filtered_data is not None and not filtered_data.empty:
-        result = filtered_data.iloc[0]  # Get the first matching row
+        result = filtered_data.iloc[0]  # Get the first matching row..-
 
     context = {
         "result": result.to_dict() if result is not None else None,
@@ -264,6 +272,7 @@ def croptable(request):
 
     # Render the search page
     return render(request, "croptable.html", context)
+
 
 # def thank_you(request):
 #     return render(request, 'thank_you.html')

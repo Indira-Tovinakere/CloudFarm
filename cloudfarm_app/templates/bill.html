@@ -14,15 +14,13 @@
             padding: 0;
             color: #fff;
         }
-
         h1 {
             text-align: center;
             margin-top: 20px;
             color: #0d0d0d;
             font-size: 2.5em;
-            text-shadow: 2px 2px 4px #f1f0f0;
+            text-shadow: 2px 2px 4px #fffdfd;
         }
-
         table {
             width: 70%;
             margin: 20px auto;
@@ -32,7 +30,6 @@
             overflow: hidden;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
         }
-
         th, td {
             padding: 12px;
             text-align: center;
@@ -41,20 +38,30 @@
             font-weight: 700;
             font-size: 1.1em;
         }
-
         th {
             background-color: rgba(96, 95, 95, 0.3);
             font-weight: bold;
             text-shadow: 1px 1px 2px #656464;
             font-size: 1.5em;
         }
-
         td {
             background-color: rgba(96, 95, 95, 0.3);
         }
-
         tr:hover {
             background-color: rgba(210, 207, 207, 0.686);
+        }
+
+        .google-translate {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .google-translate #google_translate_element {
+            color: white;
         }
 
         .total {
@@ -66,7 +73,6 @@
             color: black;
             text-shadow: 1px 1px 2px#6f6e6e;
         }
-
         #total-amount {
             background-color: rgba(255, 253, 253, 0.762);
             padding: 10px 20px;
@@ -74,20 +80,17 @@
             text-align: right;
             box-shadow: 0 4px 8px rgba(96, 95, 95, 0.3);
         }
-
         .add-to-cart {
             display: flex;
             justify-content: center;
             margin-top: 20px;
             font-weight: bold;
         }
-
         .add-to-cart input {
             margin: 0 5px;
             padding: 5px;
             font-weight: bold;
         }
-
         .add-to-cart button {
             padding: 5px 15px;
             background-color: #1a1a1a;
@@ -97,16 +100,13 @@
             cursor: pointer;
             font-weight: bold;
         }
-
         .add-to-cart button:hover {
             background-color: #1a1a1a;
         }
-
         .update-buttons {
             display: flex;
             justify-content: space-between;
         }
-
         .update-buttons button {
             padding: 5px 10px;
             background-color: rgba(210, 207, 207, 0.686);
@@ -117,7 +117,6 @@
             font-weight: bold;
             font-size: 1.0em;
         }
-
         .update-buttons button:hover {
             background-color: rgba(210, 207, 207, 0.686);
         }
@@ -135,6 +134,8 @@
             <br>
             <br>
             <br>
+            <br>
+            <br>
             <!-- Navigation Links -->
             <nav>
                 <a href="{% url 'home' %}" style="color: #ffffff; text-decoration: none; margin: 0 15px; font-size: 1.1em; transition: color 0.3s;">HOME</a>
@@ -148,6 +149,9 @@
             </nav>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
     <div class="container" style="margin-top: 100px;">
     <h1>Billing Summary</h1>
     <!-- Fertilizer List with Add to Cart Feature -->
@@ -176,7 +180,6 @@
         <input type="number" id="quantity" placeholder="Quantity" min="1" />
         <button id="add-to-cart">Add to Cart</button>
     </div>
-
     <!-- Table for Billing -->
     <table>
         <thead>
@@ -192,13 +195,11 @@
             <!-- Items will be added dynamically here -->
         </tbody>
     </table>
-
     <!-- Total Amount -->
     <div class="total">
         <span id="total-amount">Total: ₹0</span>
     </div>
     </div>
-
     <script>
         const priceList = {
             "DAP Fertilizer": 50,
@@ -217,98 +218,86 @@
             "Sulphur Fertilizer": 50,
             "White Potash Fertilizer": 55,
             "Chilated-iron Fertilizer": 65,
-            "Chelated-Foliar-Grade 2 Fertilizer": 70,
-            "Chelated-Zinc Fertilizer": 80,
-            "Chilated Foilar Fertilizer": 75,
+            "Chelated-Foliar-Grade 2 Fertilizer": 72,
+            "Chelated-Zinc Fertilizer": 68,
+            "Chilated Foilar Fertilizer": 74
         };
 
-        const cart = {};
+        let cart = {};
 
-        // Handle Add to Cart button click
-        document.getElementById('add-to-cart').addEventListener('click', () => {
+        document.getElementById('add-to-cart').addEventListener('click', function() {
             const fertilizer = document.getElementById('fertilizer-select').value;
-            const quantity = parseInt(document.getElementById('quantity').value) || 0;
-
-            if (quantity > 0) {
-                if (cart[fertilizer]) {
-                    cart[fertilizer] += quantity;
-                } else {
-                    cart[fertilizer] = quantity;
-                }
-                renderBillingTable();
-            } else {
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            if (!quantity || quantity <= 0) {
                 alert("Please enter a valid quantity.");
+                return;
             }
+            
+            if (!cart[fertilizer]) {
+                cart[fertilizer] = { quantity: 0, price: priceList[fertilizer] };
+            }
+            
+            cart[fertilizer].quantity += quantity;
+            
+            updateBillingTable();
         });
 
-        const renderBillingTable = () => {
-            const billingTable = document.getElementById('billing-table');
-            billingTable.innerHTML = ''; // Clear existing table rows
+        function updateBillingTable() {
+            const tableBody = document.getElementById('billing-table');
+            tableBody.innerHTML = '';
+
             let totalAmount = 0;
+            for (const [fertilizer, item] of Object.entries(cart)) {
+                const subtotal = item.quantity * item.price;
+                totalAmount += subtotal;
 
-            // First, create an array of products from the cart and sort them by the quantity added to cart (newly added items should appear first)
-            const sortedProducts = Object.keys(cart).sort((a, b) => {
-                // New items (non-zero quantity) should come first
-                return cart[b] - cart[a]; // Sort in descending order of quantity
-            });
-
-            // Loop through all sorted products and add them to the table
-            sortedProducts.forEach(product => {
-                const quantity = cart[product] || 0;
-                const price = priceList[product];
-                const subtotal = price * quantity;
-
-                // Create a table row for each fertilizer
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${product}</td>
-                    <td>${quantity}</td>
-                    <td>${price}</td>
-                    <td>${subtotal}</td>
+                    <td>${fertilizer}</td>
+                    <td>${item.quantity}</td>
+                    <td>₹${item.price}</td>
+                    <td>₹${subtotal}</td>
                     <td>
                         <div class="update-buttons">
-                            <button onclick="reduceQuantity('${product}')">Reduce</button>
-                            <button onclick="removeItem('${product}')">Remove</button>
+                            <button onclick="reduceQuantity('${fertilizer}')">Reduce</button>
+                            <button onclick="removeItem('${fertilizer}')">Remove</button>
                         </div>
                     </td>
                 `;
-                billingTable.appendChild(row);
-
-                // Add to total amount if the quantity is greater than 0
-                if (quantity > 0) {
-                    totalAmount += subtotal;
-                }
-            });
-
-            // Display the total amount
-            document.getElementById('total-amount').textContent = `Total: ₹${totalAmount}`;
-        };
-
-        // Reduce Quantity
-        function reduceQuantity(product) {
-            if (cart[product] > 1) {
-                cart[product] -= 1;
-            } else {
-                delete cart[product];
+                tableBody.appendChild(row);
             }
-            renderBillingTable();
+
+            document.getElementById('total-amount').textContent = `Total: ₹${totalAmount}`;
         }
 
-        // Remove Item
-        function removeItem(product) {
-            delete cart[product];
-            renderBillingTable();
-
+        function reduceQuantity(fertilizer) {
+            if (cart[fertilizer].quantity > 1) {
+                cart[fertilizer].quantity--;
+                updateBillingTable();
+            } else {
+                alert("Quantity cannot be reduced below 1.");
+            }
         }
+
+        function removeItem(fertilizer) {
+            delete cart[fertilizer];
+            updateBillingTable();
+        }
+
         const paymentButton = document.createElement('button');
-            paymentButton.textContent = 'Proceed to Payment';
-            paymentButton.style = 'margin: 20px auto; display: block; padding: 20px 20px; background-color: #1a1a1a; color: #fff; border: none; border-radius: 15px; cursor: pointer;';
-            paymentButton.addEventListener('click', () => {
+        paymentButton.textContent = 'Proceed to Payment';
+        paymentButton.style = 'margin: 20px auto; display: block; padding: 20px 20px; background-color: #1a1a1a; color: #fff; border: none; border-radius: 15px; cursor: pointer;';
+        paymentButton.addEventListener('click', () => {
+            if (Object.keys(cart).length === 0) {
+                alert("No items in the cart");
+            } else {
                 window.location.href = "/payment"; // Redirects to payment page
-            });
-            document.body.appendChild(paymentButton);
+            }
+        });
+        document.body.appendChild(paymentButton);
     </script>
-    <script type="text/javascript">
+     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en', // Default language of your webpage

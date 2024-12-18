@@ -25,6 +25,7 @@ class UserRegistration(models.Model):
 
 
 # Model for Login
+from django.contrib.auth.models import AbstractUser
 class UserLogin(models.Model):
     number = models.ForeignKey(UserRegistration, on_delete=models.CASCADE, to_field='number')
     password = models.CharField(max_length=255)
